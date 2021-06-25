@@ -1,0 +1,42 @@
+---
+title: "DataScrape"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rvest)
+library(dplyr)
+```
+
+# basic datascraping example, pulls what is on the loaded HTML page but not JS-loaded text
+
+
+```{r}
+url <- 'https://www.gofundme.com/f/help-support-heather-conn-her-children/donations'
+webpage <- read_html(url)
+```
+
+```{r}
+
+person_names_html <- html_nodes(webpage, '.m-person-info-name')
+person_names <- html_text(person_names_html)
+
+donation_amount_html <- html_nodes(webpage, '.m-person-info-content')
+donation_amount <- html_text(donation_amount_html)
+
+donation_date_html <- html_nodes(webpage, '.color-gray')
+donation_date <- html_text(donation_date_html)
+
+
+head(donation_amount)
+
+# df <- data.frame(person_names, donation_amount, donation_date)
+# df
+
+```
+
+```{r}
+demo(tripadvisor)
+```
+
